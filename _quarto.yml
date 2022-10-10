@@ -14,8 +14,9 @@ website:
 
 format:
   html:
-    theme: flatly
-    css: styles.css
+    theme: 
+      - customized_styles.scss
+    mainfont: Montserrat
     toc: true
 
 editor: visual

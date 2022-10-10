@@ -18,35 +18,29 @@ about:
       href: mailto:colleenmccamy@ucsb.edu
 ---
 
-:::{#hero-heading}
-### welcome!    
+::: {#hero-heading}
+### welcome!
 
-Hi there, I am Colleen and glad you to host you on my website. I'm currently pursuing a Master of Environmental Data Science at the [Bren School of Environmental Science and Management](https://bren.ucsb.edu/) at the UC Santa Barbara. 
+Hi there, I am Colleen and glad you to host you on my website. I'm currently pursuing a Master of Environmental Data Science at the [Bren School of Environmental Science and Management](https://bren.ucsb.edu/) at the UC Santa Barbara.
 
-I am working on unlocking and developing the skills to build creative data visualizations that connect communities to energy insights and help guide policies, encourage action, and amplify equitable solutions. In my spare time, you can find me outside on a trail, on the ocean or playing beach volleyball.  
+I am working on unlocking and developing the skills to build creative data visualizations that connect communities to energy insights and help guide policies, encourage action, and amplify equitable solutions. In my spare time, you can find me outside on a trail, on the ocean or playing beach volleyball.
 
------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ### education
 
-**Master of Environmental Data Science, 2023** | University of California, Santa Barbara, Santa Barbara, CA
+**Master of Environmental Data Science, 2023** \| University of California, Santa Barbara, Santa Barbara, CA
 
-**BA in Environmental Science, 2018** | University of California, Santa Barbara, Santa Barbara, CA
+**BA in Environmental Science, 2018** \| University of California, Santa Barbara, Santa Barbara, CA
 
-------------------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 ### experience
 
-**Silicon Valley Clean Energy**  
-Sunnyvale, CA
-(2022-present) - Digital Engagement & Data Visualization Specialist 
-(2021-2022) - Marketing Specialist
-(2019-2021) - Community Outreach Specialist
-(2018-2019) - Climate Corps Fellow
+**Silicon Valley Clean Energy**\
+Sunnyvale, CA (2022-present) - Digital Engagement & Data Visualization Specialist (2021-2022) - Marketing Specialist (2019-2021) - Community Outreach Specialist (2018-2019) - Climate Corps Fellow
 
-**UC Carbon Neutrality Initiative** 
+**UC Carbon Neutrality Initiative**
 
-Santa Barbara, CA
-(2015-2017) - Carbon Neutrality Fellow, 
-
+Santa Barbara, CA (2015-2017) - Carbon Neutrality Fellow,
 :::

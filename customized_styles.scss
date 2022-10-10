@@ -1,0 +1,40 @@
+/*-- scss:defaults --*/
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+// Colors
+$sage-green: #B2AC88;
+$pale-yellow: #fefff7;
+$dusty-pink: #b76e79;
+$charcoal-blue: #233331;
+$light-teal: #81b8b2;
+
+// Base Documents Colors
+$navbar-bg: $dusty-pink;
+$body-bg: #fafaf2;
+$body-color: $charcoal-blue;
+$link-color: $dusty-pink;
+
+$toc-font-size: 12 px;
+$h1-font-size: 12 px;
+
+/*-- scss:rules --*/
+
+h1 {
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: $dusty-pink;
+}
+
+h3 {
+  letter-spacing: 8px;
+  font-weight: 500;
+  color: $dusty-pink;
+}
+
+.custom-subtitle {
+  font-size: 22px;
+  font-style: italic;
+  color: $charcoal-blue;
+}
