@@ -25,14 +25,14 @@
     "href": "blog.html",
     "title": "blog",
     "section": "",
-    "text": "MEDS\n\n\ndata science\n\n\nR\n\n\nspatial-analysis\n\n\n\nIdentifying homes affected by the Texas energy crisis by census tract\n\n\n\nColleen McCamy\n\n\nNov 15, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMEDS\n\n\ntest\n\n\ndata science\n\n\nR\n\n\n\nthis is from the workshop\n\n\n\nColleen McCamy\n\n\nOct 24, 2022\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "MEDS\n\n\ndata science\n\n\nR\n\n\nspatial-analysis\n\n\n\nIdentifying homes affected by the Texas energy crisis by census tract\n\n\n\nColleen McCamy\n\n\nNov 15, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ndata science\n\n\n\nWelcome to my blog!\n\n\n\nColleen McCamy\n\n\nNov 12, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2022-10-24-first-blog-test/index.html",
     "href": "posts/2022-10-24-first-blog-test/index.html",
-    "title": "first blog - test",
+    "title": "First blog post",
     "section": "",
-    "text": "Footnote1 other way too 2.\ncitations for Sam’s blog post (Csik 2022)\nsea star citation\n\n\n\n\n\n\n\nReferences\n\nCsik, Samantha. 2022. “Adding a Blog to Your Existing Quarto Website.” October 24, 2022. https://samanthacsik.github.io/posts/2022-10-24-quarto-blogs/.\n\nFootnotes\n\n\nBeautiful footnote↩︎\nanother footnote↩︎\n\nCitationBibTeX citation:@online{mccamy2022,\n  author = {Colleen McCamy},\n  title = {First Blog - Test},\n  date = {2022-10-24},\n  url = {https://colleenmccamy.github.io/2022-10-24-first-blog-test},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nColleen McCamy. 2022. “First Blog - Test.” October 24,\n2022. https://colleenmccamy.github.io/2022-10-24-first-blog-test."
+    "text": "If you are reading this, that means you must have found my blog and website. I am currently learning data science through the Masters of Environmental Data Science program at the Bren School of Environmental Science & Management at UC Santa Barbara.\nI plan on using this blog space as a way to track and showcase what I am learning as I venture on data science journey. I also hope to make these blog posts fun, exciting and include the occasional pun.\nKeep calm and code on,\nColleen\n\n\n\nCitationBibTeX citation:@online{mccamy2022,\n  author = {Colleen McCamy},\n  title = {First Blog Post},\n  date = {2022-11-12},\n  url = {https://colleenmccamy.github.io/2022-11-12-first-blog-post},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nColleen McCamy. 2022. “First Blog Post.” November 12, 2022.\nhttps://colleenmccamy.github.io/2022-11-12-first-blog-post."
   },
   {
     "objectID": "posts/2022-11-15-lights-out-in-texas/index.html",

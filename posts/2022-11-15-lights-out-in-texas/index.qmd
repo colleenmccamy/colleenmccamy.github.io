@@ -1,11 +1,11 @@
 ---
 title: "Lights Out in Texas"
-description: "Identifying homes affected by the Texas energy crisis by census tract"
+description: "Identifying homes affected by the Texas energy crisis"
 author: 
   - name: Colleen McCamy
     affiliation: MEDS
 date: 2022-11-15
-categories:  [MEDS, data science, R, spatial-analysis]
+categories:  [data science, R, spatial-analysis]
 citation: 
   url: https://colleenmccamy.github.io/2022-10-24-first-blog-test
 draft: false
@@ -288,6 +288,11 @@ tm_shape(census_map_data) +
             legend.outside = TRUE,
             main.title.size = 1
             )
+```
+
+The dots indicate which census tracts were impacted by the blackout.
+
+```{r,warning=FALSE, message=FALSE}
 
 ### ---- Plotting our data --------
 
