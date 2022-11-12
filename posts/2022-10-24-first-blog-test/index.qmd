@@ -1,13 +1,13 @@
 ---
-title: "first blog - test"
-description: "this is from the workshop"
+title: "First blog post"
+description: "Welcome to my blog!"
 author: 
   - name: Colleen McCamy
     url: https://colleenmccamy.github.io/
     affiliation: MEDS
     affiliation-url: https://ucsb-meds.github.io/
 date: 2022-10-24
-categories:  [MEDS, test, data science, R]
+categories:  [MEDS, data science]
 citation: 
   url: https://colleenmccamy.github.io/2022-10-24-first-blog-test
 draft: false
@@ -17,14 +17,12 @@ bibliography: references.bib
 image: index-image.jpeg
 ---
 
-My first blog. Woot woot
+Hello! Welcome to my blog.
 
-Footnote[^1] other way too ^[another footnote].
+If you are reading this, that means you must have found my blog and website. I am currently learning data science through the Masters of Environmental Data Science program at the Bren School of Environmental Science & Management at UC Santa Barbara.
 
-[^1]: Beautiful footnote
+I plan on using this blog space as a way to track and showcase what I am learning as I venture on data science journey. I also hope to make these blog posts fun, exciting and include the occasional pun.
 
-citations for Sam's blog post [@csik2022]
+Keep calm and code on,
 
-sea star citation
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vPhg6sc1Mk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Colleen
