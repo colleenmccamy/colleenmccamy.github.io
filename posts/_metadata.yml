@@ -4,8 +4,5 @@ freeze: true
 # specfically call each individual blog post to render and prevents post from automatically rerendering when updated the website: 
   
 #enable banner style title blocks
-
-title-block-banner: index-image.jpeg
-
-title-block-banner: true
+title-block-banner: false
 title-block-banner-color: "#faf7f5"
