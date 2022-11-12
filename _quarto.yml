@@ -3,11 +3,10 @@ project:
   output-dir: docs
 
 website:
-  title: "colleenmccamy.github.io"
+  title: "Home"
   navbar:
     left:
       - href: index.qmd
-        text: Home
       - about.qmd
       - blog.qmd
       - projects.qmd
