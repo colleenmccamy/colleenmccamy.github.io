@@ -5,7 +5,7 @@ freeze: true
   
 #enable banner style title blocks
 
-title-block-banner: images/images.jpeg
+title-block-banner: index-image.jpeg
 
 title-block-banner: true
 title-block-banner-color: "#faf7f5"

@@ -13,6 +13,18 @@ citation:
 draft: false
 title-block-banner: images/images.jpeg
 title-block-banner-color: "#FAF7F5"
+bibliography: references.bib
+image: index-image.jpeg
 ---
 
 My first blog. Woot woot
+
+Footnote[^1] other way too ^[another footnote].
+
+[^1]: Beautiful footnote
+
+citations for Sam's blog post [@csik2022]
+
+sea star citation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vPhg6sc1Mk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

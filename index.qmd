@@ -8,7 +8,6 @@ about:
   image-width: 16em
   links:
     - icon: linkedin 
-      text: LinkedIn
       href: https://www.linkedin.com/in/colleen-mccamy/
     - icon: github 
       text: GitHub
