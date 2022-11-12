@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "about"
 ---
 
 Colleen is a self-proclaimed energy nerd passionate about the intersection of climate, creativity and community.

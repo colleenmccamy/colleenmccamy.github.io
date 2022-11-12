@@ -1,0 +1,10 @@
+---
+title: "blog"
+listing: 
+  type: grid
+  sort: "date desc"
+  contents: posts
+  categories: true
+  grid-item-border: true 
+  date-format: medium
+---

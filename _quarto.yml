@@ -9,13 +9,15 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
+      - blog.qmd
       - projects.qmd
       - resume.qmd
 
 format:
   html:
-    theme: flatly
-    css: styles.css
+    theme: 
+      - customized_styles.scss
+    mainfont: Montserrat
     toc: true
 
 editor: visual
