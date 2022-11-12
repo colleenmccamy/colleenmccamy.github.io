@@ -15,7 +15,7 @@ bibliography: references.bib
 image: lights-out-in-texas.png
 ---
 
-**introduction**
+### introduction ###
 
 In February 2021, the state of Texas was in a state of crisis when unusual winter storms left millions without power. Power outages pose an extra threat to customers who those who are medically vulnerable and marginalized groups and historically divested groups may be disproportionately impacted. [^1]
 
@@ -25,7 +25,7 @@ This blog post highlights an initial investigation estimating the number of home
 
 The goal of the investigation was to practice using spatial data and associated functions and packages. Further investigation is needed to answer the questions explored in this practice and this investigation's limitations are outlined in the conclusion section.
 
-**methods**
+### time to code ###
 
 This section illustrates the code executed to explore our questions.
 
@@ -330,7 +330,7 @@ summary(census_plot_data_blackout)
 summary(census_plot_data_no_blackout)
 ```
 
-**Conclusion & Limitations**
+### conclusion & limitations ###
 
 After identifying the average median income for homes in the Houston metropolitan area that experienced a blackout during Texas's 2021 energy crisis, this study showed that average median income for homes that experienced a blackout was \$71,435 and was higher for the average median income for homes that didn't experience a blackout at \$64,494.
 

@@ -17,7 +17,7 @@ bibliography: references.bib
 image: index-image.jpeg
 ---
 
-Hello! Welcome to my blog.
+### Hello! Welcome to my blog. ###
 
 If you are reading this, that means you must have found my blog and website. I am currently learning data science through the Masters of Environmental Data Science program at the Bren School of Environmental Science & Management at UC Santa Barbara.
 
