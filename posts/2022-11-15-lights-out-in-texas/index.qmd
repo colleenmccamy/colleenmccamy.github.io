@@ -53,7 +53,7 @@ For our raster data we used NASA's Worldview data for February 7, 2021 (before t
 
 VIIRS data is distributed through NASA's [Level-1 and Atmospheric Archive & Distribution System Distributed Active Archive Center (LAADS DAAC)](https://ladsweb.modaps.eosdis.nasa.gov/). Data was downloaded and prepped in advance to this assignment.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
 #reading in the NASA raster files
 nl_feb07_t1<- read_stars('/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/VNP46A1/VNP46A1.A2021038.h08v05.001.2021039064328.tif')
 
@@ -67,7 +67,7 @@ nl_feb16_t2 <- read_stars('/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_D
 
 Next up we have data from roads. To minimize accounting for light from major highways systems, we used publicly available geographic data from [OpenStreetMap (OSM)](https://planet.openstreetmap.org/) through [Geofabrik's download sites](https://download.geofabrik.de/). This data were downloaded and prepped in advance to contain a subset of highway and raods that intersect with the Houston metropolitan area. We also used data from Geofabrik's download sites for information on houses in the Houston metropolitan area.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
 
 ## ---- Highway Data
 # reading in highway data using SQL query
@@ -87,7 +87,7 @@ houses <- st_read("/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data
 
 Lastly, we use data from the [U.S. Census Bureau's American Community Survey](https://www.census.gov/programs-surveys/acs) for census tracts in 2019 from an ArcGIS file geodatabase. The metadata for each layer is available at [ACS metadata](https://www2.census.gov/geo/docs/maps-data/data/tiger/prejoined/ACSMetadata2011.txt) and this data was downloaded in advance to this investigation.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
 #reading in geometry data and selecting for the layer containing the geometry
 census_geom <- st_read("/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/ACS_2019_5YR_TRACT_48_TEXAS.gdb", layer = "ACS_2019_5YR_TRACT_48_TEXAS")
 
@@ -100,7 +100,7 @@ income_median <- st_read("/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Da
 
 The following code outlines how I created a blackout mask for the Houston area that I could use for identifying impacted homes. We operated under the assumption that any location that experienced a drop of more than 200 nW cm^-2^sr^-1^ experienced a blackout.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
 
 # combing the data into single stars objects for each day
 feb16_tile <- st_mosaic(nl_feb16_t1, nl_feb16_t2)
@@ -139,7 +139,7 @@ outage_mask_clean <- st_as_sf(hou_outage_mask_v_3083)
 
 To exclude light from highways, we created a buffer of 200 meters and kept areas in our blackout mask that were greater than 200 meters away from a highway.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
 
 # selecting the highway geometry data
 highways_geom <- highways$geom
@@ -161,7 +161,8 @@ mask_hou_highway <- outage_mask_clean[highway_buffer, , op = st_disjoint]
 
 To find the number of impacted homes, the code below outlines how I used the new blackout mask with the highway data to identify homes most likely impacted by the power outage.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
+
 # transforming houses data to be usable
 houses <- st_transform(houses, crs = 'EPSG:3083')
 houses_st <- st_as_sf(houses)
@@ -177,7 +178,7 @@ print(paste0("There were ", nrow(outage_houses), " homes affected by the power o
 
 Now that we have information on the houses that were affected we can match this with the socioeconomic census tract information and determine which census tracts were impacted by the power outage.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
 # transforming the census data to be consistent with the crs
 census_geom <- st_transform(census_geom, crs = 'EPSG:3083')
 
@@ -207,7 +208,7 @@ census_outage <- sf::st_filter(census_data, outage_houses) |>
 
 It is time to visualize our findings. This code breaks down the data wrangling needed for the visualizations and the maps and plots created to compare which census tracts experienced a blackout vs the census tracts that did not experience a blackout.
 
-```{r, echo=FALSE, warning=FALSE, message=FALSE}
+```{r,warning=FALSE, message=FALSE, results='hide'}
 
 ## --- Wrangling our data for our visualizations -----------
 
@@ -262,7 +263,7 @@ census_plot_data_no_blackout <- census_plot_data |>
 
 ```
 
-```{r,warning=FALSE, message=FALSE}
+```{r}
 
 ## ------- Mapping our data ---------------
 
@@ -292,7 +293,7 @@ tm_shape(census_map_data) +
 
 The dots indicate which census tracts were impacted by the blackout.
 
-```{r,warning=FALSE, message=FALSE}
+```{r}
 
 ### ---- Plotting our data --------
 
