@@ -12,7 +12,7 @@ draft: false
 title-block-banner: images/lights-out-in-texas.png
 title-block-banner-color: "#FAF7F5"
 bibliography: references.bib
-image: index-image.jpeg
+image: lights-out-in-texas.png
 ---
 
 **introduction**

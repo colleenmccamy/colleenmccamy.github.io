@@ -6,10 +6,10 @@ author:
     url: https://colleenmccamy.github.io/
     affiliation: MEDS
     affiliation-url: https://ucsb-meds.github.io/
-date: 2022-10-24
-categories:  [MEDS, data science]
+date: 2022-11-12
+categories:  [data science]
 citation: 
-  url: https://colleenmccamy.github.io/2022-10-24-first-blog-test
+  url: https://colleenmccamy.github.io/2022-11-12-first-blog-post
 draft: false
 title-block-banner: images/images.jpeg
 title-block-banner-color: "#FAF7F5"
