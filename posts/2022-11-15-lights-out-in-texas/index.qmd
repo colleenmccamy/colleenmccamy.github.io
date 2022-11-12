@@ -1,0 +1,325 @@
+---
+title: "Lights Out in Texas"
+description: "Identifying homes affected by the Texas energy crisis by census tract"
+author: 
+  - name: Colleen McCamy
+    affiliation: MEDS
+date: 2022-11-15
+categories:  [MEDS, data science, R, spatial-analysis]
+citation: 
+  url: https://colleenmccamy.github.io/2022-10-24-first-blog-test
+draft: false
+title-block-banner: images/lights-out-in-texas.png
+title-block-banner-color: "#FAF7F5"
+bibliography: references.bib
+image: index-image.jpeg
+---
+
+**introduction**
+
+In February 2021, the state of Texas was in a state of crisis when unusual winter storms left millions without power. Power outages pose an extra threat to customers who those who are medically vulnerable and marginalized groups and historically divested groups may be disproportionately impacted. [^1]
+
+[^1]: @online{flores2022, author = {Flores, N.M., McBrien, H., Do, V. et al.}, title = {The 2021 Texas Power Crisis: distribution, duration, and disparities.}, date = {2022-08-13}, url = {https://doi.org/10.1038/s41370-022-00462-5}, langid = {en} }
+
+This blog post highlights an initial investigation estimating the number of homes in the Houston metropolitan area that lost power as a result of the first two storms and exploring if socioeconomic factors are predictors of outage areas.
+
+The goal of the investigation was to practice using spatial data and associated functions and packages. Further investigation is needed to answer the questions explored in this practice and this investigation's limitations are outlined in the conclusion section.
+
+**methods**
+
+This section illustrates the code executed to explore our questions.
+
+[Heading to the library]{.underline}
+
+Get your library card ready because it is time to load these packages.
+
+```{r}
+
+library(dplyr)
+library(sf)
+library(stars)
+library(tmap)
+library(raster)
+library(terra)
+library(tmap)
+library(ggplot2)
+```
+
+[Step 1: Diving into the Data]{.underline}
+
+What would be a data science project without the data? The following code block uses SQL and the stars package to load in the data needed for the project.
+
+For our raster data we used NASA's Worldview data for February 7, 2021 (before the power outage) and Februray 16, 2021 (during the power outage) to visualize the extent of the power outage in the Houston area. These days were selected as other days during the time frame had too much cloud cover to be useful.
+
+VIIRS data is distributed through NASA's [Level-1 and Atmospheric Archive & Distribution System Distributed Active Archive Center (LAADS DAAC)](https://ladsweb.modaps.eosdis.nasa.gov/). Data was downloaded and prepped in advance to this assignment.
+
+```{r, echo=FALSE}
+#reading in the NASA raster files
+nl_feb07_t1<- read_stars('/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/VNP46A1/VNP46A1.A2021038.h08v05.001.2021039064328.tif')
+
+nl_feb07_t2 <- read_stars('/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/VNP46A1/VNP46A1.A2021038.h08v06.001.2021039064329.tif')
+
+nl_feb16_t1 <-read_stars('/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/VNP46A1/VNP46A1.A2021047.h08v05.001.2021048091106.tif')
+
+nl_feb16_t2 <- read_stars('/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/VNP46A1/VNP46A1.A2021047.h08v06.001.2021048091105.tif')
+
+```
+
+Next up we have data from roads. To minimize accounting for light from major highways systems, we used publicly available geographic data from [OpenStreetMap (OSM)](https://planet.openstreetmap.org/) through [Geofabrik's download sites](https://download.geofabrik.de/). This data were downloaded and prepped in advance to contain a subset of highway and raods that intersect with the Houston metropolitan area. We also used data from Geofabrik's download sites for information on houses in the Houston metropolitan area.
+
+```{r, echo=FALSE}
+
+## ---- Highway Data
+# reading in highway data using SQL query
+query <- "SELECT * FROM gis_osm_roads_free_1 WHERE fclass='motorway'"
+
+# reading in the highways data with st_read()
+highways <- st_read("/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/gis_osm_roads_free_1.gpkg", query = query)
+
+
+## ---- Houses Data
+# defining the query for the houses
+query_houses <- "SELECT * FROM gis_osm_buildings_a_free_1 WHERE (type IS NULL AND name IS NULL) OR type in ('residential', 'apartments', 'house', 'static_caravan', 'detached')"
+
+# reading in the highways data with st_read()
+houses <- st_read("/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/gis_osm_buildings_a_free_1.gpkg", query = query_houses)
+```
+
+Lastly, we use data from the [U.S. Census Bureau's American Community Survey](https://www.census.gov/programs-surveys/acs) for census tracts in 2019 from an ArcGIS file geodatabase. The metadata for each layer is available at [ACS metadata](https://www2.census.gov/geo/docs/maps-data/data/tiger/prejoined/ACSMetadata2011.txt) and this data was downloaded in advance to this investigation.
+
+```{r, echo=FALSE}
+#reading in geometry data and selecting for the layer containing the geometry
+census_geom <- st_read("/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/ACS_2019_5YR_TRACT_48_TEXAS.gdb", layer = "ACS_2019_5YR_TRACT_48_TEXAS")
+
+#reading in income data
+income_median <- st_read("/Users/colleenmccamy/Documents/MEDS/EDS_223_Spatial_Data/data/assignment3/ACS_2019_5YR_TRACT_48_TEXAS.gdb", layer = "X19_INCOME")
+
+```
+
+[Step 2: Creating a blackout mask]{.underline}
+
+The following code outlines how I created a blackout mask for the Houston area that I could use for identifying impacted homes.
+
+```{r, echo=FALSE}
+
+# combing the data into single stars objects for each day
+feb16_tile <- st_mosaic(nl_feb16_t1, nl_feb16_t2)
+feb07_tile <- st_mosaic(nl_feb07_t1, nl_feb07_t2)
+
+# adding an indicator of the attributes in the data
+feb_16_tile_names = setNames(feb16_tile, "light_16")
+feb_07_tile_names = setNames(feb07_tile, "light_07")
+
+# matrix alegbra to calculate the difference light difference between the two dates 
+blackout_dif <- feb_07_tile_names - feb_16_tile_names
+
+# #filtering for the differences of a drop less that 200 nW cm-2sr-1 as NA
+blackout_mask <- cut(blackout_dif, c(200, Inf), labels = "outage")
+
+# vectorizing the blackout mask and fixing any invalid geometries
+blackout_mask_v <- st_as_sf(blackout_mask) |> 
+  st_make_valid()
+
+# creating a polygon of Houston's coordinates 
+hou_border <- st_polygon(list(rbind(c(-96.5,29), c(-96.5,30.5), c(-94.5, 30.5), c(-94.5,29), c(-96.5,29))))
+
+# converting to an sf object and identifying the coordinate reference system
+hou_border_sf <- st_sfc(hou_border, crs = 'EPSG:4326')
+
+# cropping the blackout mask with the Houston polygon
+hou_outage_mask_v <- blackout_mask_v[hou_border_sf, ,]
+
+# reprojectting the cropped object to a new crs and converting it as an sf object
+hou_outage_mask_v_3083 <- st_transform(hou_outage_mask_v, crs = 'EPSG:3083')
+outage_mask_clean <- st_as_sf(hou_outage_mask_v_3083)
+
+```
+
+[Step 3: Excluding highway data]{.underline}
+
+To exclude light from highways, we created a buffer of 200 meters and kept areas in our blackout mask that were greater than 200 meters away from a highway.
+
+```{r, echo=FALSE}
+
+# selecting the highway geometry data
+highways_geom <- highways$geom
+
+# transforming the highway geometries to the consistent crs
+highways_geom <- st_transform(highways_geom, crs = 'EPSG:3083')
+
+# creating a buffer zone for highways geometry data of 200 meters
+highway_buffer <- st_buffer(x = highways_geom, dist = 200)
+highway_buffer <- st_transform(highway_buffer, crs = 'EPSG:3083')
+
+# combining the geometries into one and creating a mask that excludes the highway data
+highway_buffer <- st_union(highway_buffer, by_feature = FALSE)
+mask_hou_highway <- outage_mask_clean[highway_buffer, , op = st_disjoint]
+
+```
+
+[Step 4: Identifying Impacted Homes]{.underline}
+
+To find the number of impacted homes, the code below outlines how I used the new blackout mask with the highway data to identify homes most likely impacted by the power outage.
+
+```{r, echo=FALSE}
+# transforming houses data to be usable
+houses <- st_transform(houses, crs = 'EPSG:3083')
+houses_st <- st_as_sf(houses)
+
+# filtering the houses data with the blackout mask
+outage_houses <- houses_st[mask_hou_highway, drop = FALSE]
+
+# identifying how many homes were affected
+print(paste0("There were ", nrow(outage_houses), " homes affected by the power outage on Feburary 16, 2021."))
+```
+
+[Step 4: Investigating Socioeconomic factors]{.underline}
+
+Now that we have information on the houses that were affected we can match this with the socioeconomic census tract information and determine which census tracts were impacted by the power outage.
+
+```{r, echo=FALSE}
+# transforming the census data to be consistent with the crs
+census_geom <- st_transform(census_geom, crs = 'EPSG:3083')
+
+#selecting the necessary variables and renaming for clarity
+income_med_select <- income_median |> 
+  dplyr::select("GEOID", "B19013e1") |> 
+  rename(GEOID_Data = GEOID, median_income = B19013e1)
+
+# changing the income object to a data_frame
+income_med_select_df <- tibble(income_med_select)
+
+# joining census geometries and median income data
+census_data <- left_join(census_geom, 
+                         income_med_select, 
+                         by = "GEOID_Data")
+
+# transforming both objects to the correct crs
+census_data <- st_transform(census_data, crs = 'EPSG:4326')
+outage_houses <- st_transform(outage_houses, crs = 'EPSG:4326')
+
+# filtering the census data using the outage houses and adding column indicating that these census tracts were part of a blackout
+census_outage <- sf::st_filter(census_data, outage_houses) |> 
+  mutate(blackout = 'yes')
+```
+
+[Step 5: Comparing the incomes of impacted tracts and unimpacted tracts]{.underline}
+
+It is time to visualize our findings. This code breaks down the data wrangling needed for the visualizations and the maps and plots created to compare which census tracts experienced a blackout vs the census tracts that did not experience a blackout.
+
+```{r, echo=FALSE}
+
+## --- Wrangling our data for our visualizations -----------
+
+# transforming both objects to the crs 4326 to crop it
+census_data <- st_transform(census_data, crs = 'EPSG:4326')
+hou_border_sf <- st_transform(hou_border_sf, crs = 'EPSG:4326')
+
+# cropping the census data with the Houston border for filtering
+census_data_hou <- census_data[hou_border_sf, ,] 
+
+# transforming census data back to the EPSG:3083 crs
+census_data_hou <- st_transform(census_data_hou, crs = 'EPSG:3083')
+
+# selecting necessary columns for houston census data
+census_data_hou <- census_data_hou |> 
+  dplyr::select("NAMELSAD", "Shape", "median_income", "GEOID_Data")
+
+# selecting necessary columns for outage data by census track
+census_outage <- census_outage |> 
+  dplyr::select("blackout", "GEOID_Data")
+census_outage_map <- census_outage |> 
+  dplyr::select("blackout")
+
+# converting census outage data to a dataframe in order to join
+census_outage_df <- as.data.frame(census_outage)
+
+# joining census outage data and census data for all of Houston
+census_map_data <- left_join(census_data_hou, 
+                             census_outage_df, 
+                             by = "GEOID_Data")
+
+census_map_data <- census_map_data |> 
+  dplyr::select('median_income', 'blackout')
+
+# converting census map data to a dataframe to plot
+census_plot_data <- data_frame(census_map_data)
+
+# adding an indicator for homes that didn't experience a blackout
+census_plot_data <- census_plot_data |> 
+  mutate(blackout = replace(blackout, is.na(blackout), "no"))
+
+# creating a data frame for homes that experienced a blackout to plot
+census_plot_data_blackout <- census_plot_data |> 
+  dplyr::select("median_income", "blackout") |> 
+  filter(blackout == "yes")
+
+
+# creating a data frame for homes that didn't experienced a blackout to plot
+census_plot_data_no_blackout <- census_plot_data |> 
+  dplyr::select("median_income", "blackout") |> 
+  filter(blackout == "no")
+
+```
+
+```{r, warning=FALSE}
+
+## ------- Mapping our data ---------------
+
+# changing the view mode to be interactive
+tmap_mode("view")
+
+# mapping median income by census track and identifying outages by dots
+tm_shape(census_map_data) +
+  tm_polygons(col = "median_income",
+              palette = c("#227c9d", 
+                          "#17c3b2", 
+                          "#ffcb77", 
+                          "#ffe2b3", 
+                          "#feb3b1", 
+                          "#fe6d73"),
+              textNA = "Missing Income Data", 
+              colorNA = "#e4ebea",
+              title = "Median Income") +
+  tm_shape(census_outage_map) +
+  tm_dots(shape = 1,
+          title = 'blackout') +
+  tm_layout(main.title = "Houston Census Data by Income that Experienced A Power Outage",
+            legend.outside = TRUE,
+            main.title.size = 1
+            )
+
+### ---- Plotting our data --------
+
+# plotting census data that experienced a blackout
+ggplot(census_plot_data_blackout, aes(x = median_income)) +
+  geom_histogram(color = "#3d5a80",fill = "#98c1d9") +
+  labs(title = "Median Income for Homes that Experienced a Blackout",
+       x = "Median Income",
+       y = "Count") +
+  theme_minimal()
+
+# plotting census data that didn't experienced a blackout
+ggplot(census_plot_data_no_blackout, aes(x = median_income)) +
+  geom_histogram(fill = "#81b29a",
+                 color = "#335c67") +
+  labs(title = "Median Income for Homes that Didn't Experience a Blackout",
+       x = "Median Income",
+       y = "Count") +
+  theme_minimal()
+
+# plotting the comparison data via geom jitter plot
+ggplot(census_plot_data, aes(x = blackout, y = median_income)) +
+  geom_jitter(width = 0.1,
+              height = 0,
+              color = "#248577",
+              alpha = 0.8) +
+  labs(title = "Comparing Median Income for Homes that Experienced a Blackout or Not",
+       x = "Experienced Blackout",
+       y = "Median Income") +
+  theme_minimal()
+
+# loading the summary statistics of our data
+summary(census_plot_data_blackout)
+summary(census_plot_data_no_blackout)
+```
