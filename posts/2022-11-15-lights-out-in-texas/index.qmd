@@ -49,7 +49,7 @@ library(ggplot2)
 
 What would be a data science project without the data? The following code block uses SQL and the stars package to load in the data needed for the project.
 
-For our raster data we used NASA's Worldview data for February 7, 2021 (before the power outage) and Februray 16, 2021 (during the power outage) to visualize the extent of the power outage in the Houston area. These days were selected as other days during the time frame had too much cloud cover to be useful.
+For our raster data we used NASA's Worldview data for February 7, 2021 (before the power outage) and February 16, 2021 (during the power outage) to visualize the extent of the power outage in the Houston area. These days were selected as other days during the time frame had too much cloud cover to be useful.
 
 VIIRS data is distributed through NASA's [Level-1 and Atmospheric Archive & Distribution System Distributed Active Archive Center (LAADS DAAC)](https://ladsweb.modaps.eosdis.nasa.gov/). Data was downloaded and prepped in advance to this assignment.
 
