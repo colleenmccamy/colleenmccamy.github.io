@@ -3,8 +3,10 @@ project:
   output-dir: docs
 
 website:
-  title: "Home"
+  favicon: images/logo_cm.png
   navbar:
+    title: false
+    logo: images/logo_cm.png
     right:
       - href: index.qmd
         text: home
