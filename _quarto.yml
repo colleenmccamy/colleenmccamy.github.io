@@ -4,16 +4,27 @@ project:
 
 website:
   favicon: images/logo_cm.png
+  page-footer:
+    left: 
+      - icon: github
+        href: https://github.com/colleenmccamy
+      - icon: linkedin
+        href: https://www.linkedin.com/in/colleen-mccamy/
+    right: "Copyright 2022, Colleen McCamy"
+    border: false
+    background: light
   navbar:
     title: false
     logo: images/logo_cm.png
     right:
-      - href: index.qmd
-        text: home
       - about.qmd
       - blog.qmd
-      - projects.qmd
-      - resume.qmd
+      - icon: code-square
+        href: projects.qmd
+        #icon: code-square
+      #- resume.qmd
+    collapse-below: sm
+    search: true
 
 format:
   html:
