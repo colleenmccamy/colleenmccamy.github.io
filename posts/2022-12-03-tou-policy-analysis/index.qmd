@@ -387,7 +387,7 @@ Given additional analysis is conducted, this information can be used to inform p
 
 ### supporting figures & links
 
-To see the full repository, check out the project on GitHub at:\
+To see the full repository, check out the project on Github at:\
 https://github.com/colleenmccamy/tou-energy-analysis
 
 Table 1:
