@@ -40,7 +40,7 @@ While many utilities have piloted time-varying rates, the recent California TOU 
 
 [^5]: "California Utilities Prep Nation's Biggest Time-of-Use Rate Rollout." n.d. Utility Dive. Accessed December 3, 2022. https://www.utilitydive.com/news/california-utilities-prep-nations-biggest-time-of-use-rate-roll-out/543402/. }
 
-Answering the question, 'did the Time-of-Use electricity rate transition have an effect on peak energy demand in the San Diego region?,' can help provide insight to spur further investigations on time-based rates throughout the state of California and beyond.
+Answering the question, 'did the Time-of-Use electricity rate transition have an effect on peak energy demand in the San Diego region?,' can help provide insight on the policy's effect and spur further investigations on time-based rates throughout the state of California and beyond.
 
 ### the data
 
