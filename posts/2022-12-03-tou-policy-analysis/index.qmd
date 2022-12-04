@@ -5,7 +5,7 @@ author:
   - name: Colleen McCamy
     affiliation: MEDS
 date: 2022-12-03
-categories:  [data science, R, spatial-analysis]
+categories:  [data science, R, modeling, time series]
 citation: 
   url: https://colleenmccamy.github.io/2022-12-03-tou-policy-analysis
 draft: false
@@ -20,7 +20,7 @@ image: energy-meters.jpg
 
 ### the question
 
-#### Did the Time-of-Use electricity rate transition have an effect on peak energy demand in the greater San Diego region?
+#### Did the Time-of-Use electricity rate transition have an effect on energy demand in the greater San Diego region?
 
 ### introduction
 
@@ -311,7 +311,7 @@ decom_plot_monthly <- model(decom_ts,
 ### results
 
 [Multiple Linear Regression:]{.underline}\
-We can interpret all of the parameters used in the regression are significant predictors for hourly electricity demand at a significance level of 0.001 as they all had a p-value of 2 x e^-16^. The model indicates that when daily maximum temperature is below 80 °F, for non-peak hours and prior to the Time-of-Use implementation in 2020, the average hourly electricity demand is about 2,164 MWh for the SDGE's service territory. In addition, we expect to see on average a decrease in hourly electricity demand by about 108 MWh for years after the Time-of-Use energy policy was implemented, holding all other predictors constant. For days in which the maximum temperature above 80 °F, the model predicts that the average hourly electricity demand increases by about 409 MWh holding all other predictors constant.
+We can interpret all of the predictors used in the regression are significant predictors for hourly electricity demand at a significance level of 0.001 as they all had a p-value of 2 x e^-16^. The model indicates that when daily maximum temperature is below 80 °F, for non-peak hours and prior to the Time-of-Use implementation in 2020, the average hourly electricity demand is about 2,164 MWh for the SDGE's service territory. In addition, we expect to see on average a decrease in hourly electricity demand by about 108 MWh for years after the Time-of-Use energy policy was implemented, holding all other predictors constant. For days in which the maximum temperature above 80 °F, the model predicts that the average hourly electricity demand increases by about 409 MWh holding all other predictors constant.
 
 Interestingly, the model predicts that the average hourly electricity demand decreases by about 360 MWh holding all other predictors constant. At first thought, we may expect too see hourly electricity demand to increase during peak times as these are times in which the time-of-use electricity highlights as times with high demands. However, in this analysis we didn't look at the amount of renewable electricity available on the grid. Thus, overall energy demand may be lower during peak times but it is possible the percent of average hourly electricity demand in relation to hourly renewable electricity available on the grid may be higher during peak times than non-peak times.
 
