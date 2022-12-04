@@ -9,8 +9,12 @@ categories:  [data science, R, spatial-analysis]
 citation: 
   url: https://colleenmccamy.github.io/2022-10-24-first-blog-test
 draft: false
+format:
+  html:
+    code-fold: true
+    code-summary: "checkout the code"
 title-block-banner: images/lights-out-in-texas.png
-title-block-banner-color: "#FAF7F5"
+#title-block-banner-color: "#FAF7F5"
 bibliography: references.bib
 image: lights-out-in-texas.png
 ---

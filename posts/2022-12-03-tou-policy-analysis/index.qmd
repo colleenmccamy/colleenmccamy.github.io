@@ -20,7 +20,7 @@ image: energy-meters.jpg
 
 ### the question
 
-#### Did the Time-of-Use electricity rate transition have an effect on energy demand in the greater San Diego region?
+#### **Did the Time-of-Use electricity rate transition have an effect on energy demand in the greater San Diego region?**
 
 ### introduction
 
@@ -45,7 +45,7 @@ Answering the question, 'did the Time-of-Use electricity rate transition have an
 ### the data
 
 [Energy Demand Data]{.underline}\
-Energy demand data used in this analysis are publicly available and provided by the US Energy Information Administration. The data were downloaded via the API dashboard [^6] and were selected to include the time frame of July 1, 2018 to July 31, 2022, hourly demand by subregion in megawatt hours (MWh) in the local time zone (Pacific), and the San Diego Gas and Electric (SDGE) subregion. SDGE serves 3.7 million people through 1.5 million electric meters covering 4,100 square miles in San Diego and southern Orange counties. The energy demand data are an aggregate electricity demand from all customers throughout SDGE's service territory.[^7]
+Energy demand data used in this analysis are publicly available and provided by the US Energy Information Administration. The data were downloaded via the API dashboard [^6] and were selected to include the dates of July 1, 2018 to July 31, 2022, hourly demand by subregion in megawatt hours (MWh) in the local time zone (Pacific), and the San Diego Gas and Electric (SDGE) subregion. SDGE serves 3.7 million people through 1.5 million electric meters covering 4,100 square miles in San Diego and southern Orange counties. The energy demand data are an aggregate electricity demand from all customers throughout SDGE's service territory.[^7]
 
 [^6]: "API Dashboard - U.S. Energy Information Administration (EIA)." n.d. Accessed December 3, 2022. https://www.eia.gov/opendata/browser/electricity/rto/region-sub-ba-data. }
 
@@ -190,7 +190,7 @@ energy_temp_df <- left_join(x = eia_data,
 
 A multi-linear regression and time series decomposition analysis can help answer the question at hand. Prior to conducting the linear model, I also used summary statistics to a cutoff point for a dichotomous variable.
 
-#### linear model
+#### [Linear Model]{.underline}
 
 To investigate if the implementation of the TOU policy had an effect on energy demand, I used a multiple linear regression model. However, since other factors also have an effect on electricity demand, I added the temperature and hour of the day on hourly electricity demand. The equation for this model is: $$hwy_i =\beta_{0}+\beta_{1} \cdot TOUPolicy_i +\beta_{2} \cdot \text HotDay_i+ \beta_{3} \cdot \text PeakHour_i +\varepsilon_i$$
 
@@ -264,7 +264,22 @@ model_tou_peak_demand <- lm(formula = hourly_energy_mwh ~
 
 ```
 
-#### time series analysis
+The previous regression model predicts energy demand given that each predictor doesn't influence the relationship between the energy demand and another variable. However, thinking about the time-of-use policy implementation, we can add an interaction model to the linear regression to see if the effect of peak hours is affected by the TOU policy implementation. I would predict that there would be a greater energy decrease after the TOU policy was implemented than before during the peak hours.
+
+```{r,warning=FALSE, message=FALSE, results='hide'}
+model_int_tou_peak_demand <- lm(formula = hourly_energy_mwh ~ 
+                              tou_policy + 
+                              peak_hours +
+                              hot_day + 
+                              peak_hours * tou_policy,
+                            data = energy_temp_df)
+
+summary(model_int_tou_peak_demand)
+
+```
+
+
+#### [Time Series Analysis]{.underline}
 
 To dive furthering into additional affects on energy demand, I conducted a classical decomposition analysis to look into other factors influence hourly electricity demand, such as seasonality or overall energy demand trends.
 
@@ -338,8 +353,23 @@ ggPredict(model_tou_peak_demand,
 
 This figure above graphs the magnitude of the decrease for the TOU policy for each of the outcomes of the other predictors.
 
+[Multiple Linear Regression with the interaction model:]{.underline}\
+This interaction model tells us that the average change in hourly energy demand during peak hours after the TOU policy was implemented compared to hourly energy demand during peak hours before the TOU policy was implemented is -98 MWh and is statistically significant at a significance level of 0.001 (p-value of 2 x e^-16^). The graph (Figure 3) below of the linear model with the interaction model indicates that the relationship between energy demand and peak hours varies based on the implementation of the TOU policy. 
+
+
+```{r,warning=FALSE, message=FALSE, results='hide'}
+
+ggPredict(model_int_tou_peak_demand, 
+          jitter = TRUE, 
+          interactive = TRUE)
+```
+
+The adjusted R^2^ values also increased slightly (from 0.213 to 0.214) when adding the interaction model. This demonstrates that the interaction model slightly increases model fit. 
+
+However, the adjusted R^2^ value indicates that only about 21% of hourly energy demand is explained by the model. With this information, we can hypothesis that there are other factors that affect hourly energy demand not included within this model. Therefore, we can state that the time-of-use policy implementation had a statically significant decrease in hourly energy demand (at a significance level of 0.001) but overall hourly energy demand is more greater affected by other predictors. 
+
 [Time Series Analysis - Classical Decomposition:]{.underline}\
-To better understand possible seasonal and overall trends in hourly electricity demand, we can look at a classical decomposition graphs for our time series data for both yearly and monthly seasonality (Figure 2 and 3).
+To better understand the other factors that influence hourly energy demand, we can look at a classical decomposition graphs for our time series data for both yearly and monthly seasonality (Figure 2 and 3).
 
 ```{r,warning=FALSE, message=FALSE, results='hide'}
 
@@ -348,7 +378,7 @@ ggarrange(decom_plot_monthly, decom_plot_annual,
 
 ```
 
-Looking at the graphs there doesn't appear to be evidence of a long-run trend in hourly energy demand over time period analyzed as the trend seems to be mostly constant when seasonality is defined as 30 days and 365 days. It also appears that seasonality may be important in driving overall variation in electricity demand when seasonality is defined as 365 days since the gray bar is closer in scale to the overall time series graph. Anecdotaly , this is intuitive as we can predict that the variance in hourly electricity could be affected by the month. Since month of the year and temperature are it is logical how seasonality based on month affects energy demand given the known relationship on temperature and energy. However, when seasonality is defined as 30 days, the seasonal effect appears to be not as important in the driving overall variation in electricity demand.
+Looking at the graphs there doesn't appear to be evidence of a long-run trend in hourly energy demand over time period analyzed as the trend seems to be mostly constant when seasonality is defined as 30 days and 365 days. It also appears that seasonality may be important in driving overall variation in electricity demand when seasonality is defined as 365 days since the gray bar is closer in scale to the overall time series graph. Anecdotally , this is intuitive as we can predict that the variance in hourly electricity could be affected by the month. Since month of the year and temperature are it is logical how seasonality based on month affects energy demand given the known relationship on temperature and energy. However, when seasonality is defined as 30 days, the seasonal effect appears to be not as important in the driving overall variation in electricity demand.
 
 ### discussion & conclusion
 
