@@ -4,6 +4,7 @@ project:
 
 website:
   favicon: images/logo_cm.png
+  title: "Colleen McCamy"
   page-footer:
     left: 
       - icon: github
