@@ -1,8 +1,8 @@
 ---
 title: "colleen mccamy"
-image: images/headshot-colleen.png
+image: images/kelp-profile-pic.png
 about: 
-  #id: hero-heading
+  id: hero-heading
   template: trestles
   image-shape: round
   image-width: 16em
