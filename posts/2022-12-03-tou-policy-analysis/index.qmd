@@ -35,20 +35,23 @@ image: energy-meters.jpg
 California has ambitious clean energy and decarbonization goals. [^1] To achieve these goals, the state will need to increase its current electricity grid capacity by about three times.[^2] Time-of-use electricity rates are a valuable strategy to help reduce the investment needed for expanding grid capacity and can help maximize the use of renewable resources.[^3]
 :::
 
-[^1]: California, State of. 2022. "California Releases World's First Plan to Achieve Net Zero Carbon Pollution." California Governor. November 16, 2022. https://www.gov.ca.gov/2022/11/16/california-releases-worlds-first-plan-to-achieve-net-zero-carbon-pollution/. }
+[^1]: California, State of. 2022. "California Releases World's First Plan to Achieve Net Zero Carbon Pollution." California Governor. November 16, 2022. https://www.gov.ca.gov/2022/11/16/california-releases-worlds-first-plan-to-achieve-net-zero-carbon-pollution/. 
 
-[^2]: California, State of. 2022. "California Releases World's First Plan to Achieve Net Zero Carbon Pollution." California Governor. November 16, 2022. https://www.gov.ca.gov/2022/11/16/california-releases-worlds-first-plan-to-achieve-net-zero-carbon-pollution/. }
+[^2]: California, State of. 2022. "California Releases World's First Plan to Achieve Net Zero Carbon Pollution." California Governor. November 16, 2022. https://www.gov.ca.gov/2022/11/16/california-releases-worlds-first-plan-to-achieve-net-zero-carbon-pollution/. 
 
 [^3]: http://www.caiso.com/documents/matchingtimeofuseperiodswithgridconditions-fastfacts.pdf }
 
 The Time-of-Use (TOU) energy rate referenced in this analysis establishes lower electricity prices for times when there is more renewable energy supply available and helps to encourage electricity use when generation is cleanest and lowest-cost. Additionally, energy rates are higher during the evening peak to help promote less energy use during times when renewable energy supply decreases and grid operators need to ramp up generation from fossil-fuel based power plants. For the default residential rate which is the assumed TOU rate in this analysis, the higher cost hours or "peak hours" are from 4:00 - 9:00 p.m. [^4]
 
-[^4]: "Time of Use." n.d. SVCE (blog). Accessed December 3, 2022. https://svcleanenergy.org/time-of-use/. }
+[^4]: "Time of Use." n.d. SVCE (blog). Accessed December 3, 2022. https://svcleanenergy.org/time-of-use/. 
 
 
-While many utilities have piloted time-varying rates, the recent California TOU transition was the biggest test of time-based rates yet - automatically switching over 20 million electricity consumers to a TOU rate. [^5] While there has been some initial research and analysis on time-based rates in electricity markets, there are limited results on mass-market transitions and how time-based rates affect total electricity consumption.
+While many utilities have piloted time-varying rates, the recent California TOU transition was the biggest test of time-based rates yet - automatically switching over 20 million electricity consumers to a TOU rate. [^5] While there has been some initial research and analysis on time-based rates in electricity markets, there are limited results on mass-market transitions and how time-based rates affect total electricity consumption.[^6]
 
-[^5]: "California Utilities Prep Nation's Biggest Time-of-Use Rate Rollout." n.d. Utility Dive. Accessed December 3, 2022. https://www.utilitydive.com/news/california-utilities-prep-nations-biggest-time-of-use-rate-roll-out/543402/. }
+[^5]: "California Utilities Prep Nation's Biggest Time-of-Use Rate Rollout." n.d. Utility Dive. Accessed December 3, 2022. https://www.utilitydive.com/news/california-utilities-prep-nations-biggest-time-of-use-rate-roll-out/543402/.
+
+[^5]: James Sherwood et al., A Review of Alternative Rate Designs: Industry experience with time-based and demand charge rates for mass-market customers (Rocky Mountain Institute, May 2016), http://www.rmi. org/alternative_rate_designs.
+
 
 Answering the question, 'did the Time-of-Use electricity rate transition have an effect on peak energy demand in the San Diego region?,' can help provide insight on the policy's effect and spur further investigations on time-based rates throughout the state of California and beyond.
 
@@ -64,9 +67,9 @@ Electricity demand data used in this analysis are publicly available and provide
 :::
 
 
-[^6]: "API Dashboard - U.S. Energy Information Administration (EIA)." n.d. Accessed December 3, 2022. https://www.eia.gov/opendata/browser/electricity/rto/region-sub-ba-data. }
+[^7]: "API Dashboard - U.S. Energy Information Administration (EIA)." n.d. Accessed December 3, 2022. https://www.eia.gov/opendata/browser/electricity/rto/region-sub-ba-data. 
 
-[^7]: "Our Company \| San Diego Gas & Electric." n.d. Accessed December 3, 2022. https://www.sdge.com/more-information/our-company. }
+[^8]: "Our Company \| San Diego Gas & Electric." n.d. Accessed December 3, 2022. https://www.sdge.com/more-information/our-company. 
 
 ```{r,warning=FALSE, message=FALSE, results='hide'}
 #loading the necessary libraries
@@ -113,13 +116,13 @@ In California, peak electricity demand and temperature is highly correlated. [^8
 ![](thermostat_circle.png)
 :::
 
-[^8]: Miller, Norman L., Katharine Hayhoe, Jiming Jin, and Maximilian Auffhammer. 2008. "Climate, Extreme Heat, and Electricity Demand in California." Journal of Applied Meteorology and Climatology 47 (6): 1834--44. https://doi.org/10.1175/2007JAMC1480.1. }
+[^9]: Miller, Norman L., Katharine Hayhoe, Jiming Jin, and Maximilian Auffhammer. 2008. "Climate, Extreme Heat, and Electricity Demand in California." Journal of Applied Meteorology and Climatology 47 (6): 1834--44. https://doi.org/10.1175/2007JAMC1480.1. 
 
-[^9]: US Department of Commerce, NOAA. n.d. "Climate." NOAA's National Weather Service. Accessed December 3, 2022. https://www.weather.gov/wrh/Climate?wfo=sgx. }
+[^10]: US Department of Commerce, NOAA. n.d. "Climate." NOAA's National Weather Service. Accessed December 3, 2022. https://www.weather.gov/wrh/Climate?wfo=sgx.
 
 Since the temperature data is an aggregate of multiple stations throughout San Diego County, this can cause bias as the SDGE service territory covers multiple different climate zones [^10] which may not be accurately represented within the aggregate average temperature for the stations. Also, the weather stations are more heavily concentrated towards the coast which may be a source of bias towards cooler, more moderate in the data used.
 
-[^10]: "Baseline Allowance Calculator \| San Diego Gas & Electric." n.d. Accessed December 4, 2022. https://webarchive.sdge.com/baseline-allowance-calculator.}
+[^11]: "Baseline Allowance Calculator \| San Diego Gas & Electric." n.d. Accessed December 4, 2022. https://webarchive.sdge.com/baseline-allowance-calculator.
 
 ```{r,warning=FALSE, message=FALSE, results='hide'}
 # loading in the temperature data
