@@ -39,7 +39,7 @@ I am working on unlocking and developing the skills to build creative data visua
 
 ### experience
 
-**Silicon Valley Clean Energy**
+[**Silicon Valley Clean Energy**]{.underline}
 
 -   Digital Engagement & Data Visualization Specialist (2022 - present)
 
@@ -49,6 +49,6 @@ I am working on unlocking and developing the skills to build creative data visua
 
 -   Climate Corps Fellow (2018-2019)
 
-**UC Carbon Neutrality Initiative**
+[**UC Carbon Neutrality Initiative**]{.underline}
 
 -   Carbon Neutrality Fellow (2015-2017)
