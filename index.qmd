@@ -17,14 +17,16 @@ about:
       href: mailto:colleenmccamy@ucsb.edu
 ---
 
-
+::: column-page
 Hi there, I am Colleen and glad you to host you on my website. I'm currently pursuing a Master of Environmental Data Science at the [Bren School of Environmental Science and Management](https://bren.ucsb.edu/) at the UC Santa Barbara.
 
 I am working on unlocking and developing the skills to build creative data visualizations that connect communities to energy insights and help guide policies, encourage action, and amplify equitable solutions. In my spare time, you can find me outside on a trail or playing beach volleyball.
+:::
 
 ::: column-page
 ![](images/wind_hero_image.png)
 :::
+
 ------------------------------------------------------------------------
 
 ### education
@@ -37,9 +39,16 @@ I am working on unlocking and developing the skills to build creative data visua
 
 ### experience
 
-**Silicon Valley Clean Energy**\
-Sunnyvale, CA (2022-present) - Digital Engagement & Data Visualization Specialist (2021-2022) - Marketing Specialist (2019-2021) - Community Outreach Specialist (2018-2019) - Climate Corps Fellow
+**Silicon Valley Clean Energy**
+
+-   Digital Engagement & Data Visualization Specialist (2022 - present)
+
+-   Marketing Specialist (2021-2022)
+
+-   Community Outreach Specialist (2019-2021)
+
+-   Climate Corps Fellow (2018-2019)
 
 **UC Carbon Neutrality Initiative**
 
-Santa Barbara, CA (2015-2017) - Carbon Neutrality Fellow,
+-   Carbon Neutrality Fellow (2015-2017)
