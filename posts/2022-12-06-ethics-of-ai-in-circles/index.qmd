@@ -18,7 +18,7 @@ format:
 page-layout: article
 #title-block-banner: energy-meters.jpg
 #bibliography: references.bib
-image: energy-meters.jpg
+image: header-image.png
 ---
 
 ::: g-col-4
