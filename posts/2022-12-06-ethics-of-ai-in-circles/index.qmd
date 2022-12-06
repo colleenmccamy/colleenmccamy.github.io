@@ -1,0 +1,131 @@
+---
+title: "Ethics of AI Illustrated in Circles"
+description: "Highlighting biases entangled with environmental applications of AI"
+author: 
+  - name: Colleen McCamy
+    affiliation: MEDS
+date: 2022-12-03
+categories:  [data science, graphics]
+citation: 
+  url: https://colleenmccamy.github.io/2022-12-03-tou-policy-analysis
+draft: false
+format:
+  html:
+    code-fold: true
+    code-summary: "checkout the code"
+    code-overflow: wrap
+    code-block-bg: "#ffe3ef"
+page-layout: article
+#title-block-banner: energy-meters.jpg
+#bibliography: references.bib
+image: energy-meters.jpg
+---
+
+::: g-col-4
+![](cover-page-ai-biases.png)
+:::
+::: g-col-4
+![](1.png)
+:::
+::: g-col-4
+![](2.png)
+:::
+::: g-col-4
+![](3.png)
+:::
+::: g-col-4
+![](4.png)
+:::
+::: g-col-4
+![](5.png)
+:::
+::: g-col-4
+![](6.png)
+:::
+::: g-col-4
+![](7.png)
+:::
+::: g-col-4
+![](8.png)
+:::
+::: g-col-4
+![](9.png)
+:::
+::: g-col-4
+![](10.png)
+:::
+::: g-col-4
+![](11.png)
+:::
+::: g-col-4
+![](12.png)
+:::
+::: g-col-4
+![](13.png)
+:::
+::: g-col-4
+![](14.png)
+:::
+::: g-col-4
+![](15.png)
+:::
+::: g-col-4
+![](16.png)
+:::
+::: g-col-4
+![](17.png)
+:::
+::: g-col-4
+![](18.png)
+:::
+::: g-col-4
+![](19.png)
+:::
+::: g-col-4
+![](20.png)
+:::
+::: g-col-4
+![](21.png)
+:::
+::: g-col-4
+![](22.png)
+:::
+::: g-col-4
+![](23.png)
+:::
+::: g-col-4
+![](24.png)
+:::
+::: g-col-4
+![](25.png)
+:::
+::: g-col-4
+![](26.png)
+:::
+::: g-col-4
+![](27.png)
+:::
+::: g-col-4
+![](28.png)
+:::
+::: g-col-4
+![](29.png)
+:::
+::: g-col-4
+![](30.png)
+:::
+::: g-col-4
+![](31.png)
+:::
+::: g-col-4
+![](32.png)
+:::
+::: g-col-4
+![](33.png)
+:::
+::: g-col-4
+![](34.png)
+:::
+
+
+### 
