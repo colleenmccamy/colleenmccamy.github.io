@@ -113,7 +113,7 @@ In California, peak electricity demand and temperature is highly correlated. [^7
 ![](thermostat_circle.png)
 :::
 
-Since the temperature data is an aggregate of multiple stations throughout San Diego County, this can cause bias as the SDGE service territory covers multiple different climate zones [^9] which may not be accurately represented within the aggregate average temperature for the stations. Also, the weather stations are more heavily concentrated towards the coast which may be a source of bias towards cooler, more moderate in the data used.
+The temperature data is an aggregate of multiple stations throughout San Diego County, whic can cause sampling bias. The SDGE service territory covers multiple different climate zones [^9] which may not be accurately represented in proportion to hourly energy demand within the aggregate average temperature for the stations. Also, the weather stations are more heavily concentrated towards the coast which may be a source of bias producing more cooler and moderate moderate maximum temperature in the data.
 
 [^9]: US Department of Commerce, NOAA. n.d. "Climate." NOAA's National Weather Service. Accessed December 3, 2022. https://www.weather.gov/wrh/Climate?wfo=sgx.
 
@@ -182,9 +182,9 @@ peak_demand_plot <- ggplot(data = daily_peak_hrs_df,
        aes(x = date, 
            y = daily_energy_mwh)) +
   geom_line(col = "#b52b8c") +
-  labs(title = "Hourly Energy Demand (MWh)",
+  labs(title = "Hourly Energy Demand (MWh) During Peak Hours Over Time",
        x = "Date",
-       y = "MWh") +
+       y = "Houlry Electricity Demand (MWh) Durin Peak Hours") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -205,17 +205,19 @@ energy_temp_df <- left_join(x = eia_data,
 
 ```
 
+We can see a spike in the peak hourly electricity demand in late 2018. Upon further investigation, it is unclear what may be causing this demand. For a more accurate analysis, it would be important to understand this spike. Solutions could include confirming that this spike was also present in other utility energy demand data and identifying additional factors which could cause this spike.
+
 ### analysis
 
 A multi-linear regression model and time series decomposition analysis can help answer the question at hand. Prior to conducting the linear model, I also used summary statistics to a establish cutoff point in creating temperature as a dichotomous variable.
 
 #### [Linear Model]{.underline}
 
-To investigate if the implementation of the TOU policy had an effect on energy demand, I used a multiple linear regression model as other factors also have an effect on electricity demand such as the temperature and hour of the day. The equation for this model is: $$hwy_i =\beta_{0}+\beta_{1} \cdot TOUPolicy_i +\beta_{2} \cdot \text HotDay_i+ \beta_{3} \cdot \text PeakHour_i +\varepsilon_i$$
+To investigate if TOU policy influenced hourly energy demand, I used a multiple linear regression model. The equation for this model is: $$hwy_i =\beta_{0}+\beta_{1} \cdot TOUPolicy_i +\beta_{2} \cdot \text HotDay_i+ \beta_{3} \cdot \text PeakHour_i +\varepsilon_i$$
 
-The 'TOUPolicy' predictor ('tou_policy' in the results) is a dichotomous variable indicating if the TOU Policy was in effect or not. The 'PeakHour' predictor is also a dichotomous variable which indicates whether or not the hour of the day was during peak times from 4:00 - 9:00 p.m for the TOU pricing.
+The 'TOUPolicy' predictor ('tou_policy' in the results) is a dichotomous variable indicating if the TOU Policy was in effect or not. The 'PeakHour' predictor is also a dichotomous variable which indicates whether or not the hour of the day falls within peak TOU pricing times from 4:00 - 9:00 p.m.
 
-Lastly, the 'HotDay' variable ('hot_day' in the results) is a dichotomous variable indicating if the maximum temperature for the San Diego region was equal to or greater than 80°F or below 80°F. This cutoff temperature was determined by looking at the mean and standard deviation of the maximum temperature in San Diego during the time of interest. The average maximum temperature was about 72°F and the standard deviation about 7°F. Thus, 80°F was determined to be a 'hot day' for exploring the effect of heat and hourly electricity demand in the model.
+Lastly, the 'HotDay' variable ('hot_day' in the results) is a dichotomous variable indicating if the maximum temperature for the San Diego region was equal to or greater than 80°F or below. This cutoff temperature was determined by looking at the mean and standard deviation of the maximum temperature in San Diego during the time of interest. The average maximum temperature was about 72°F and the standard deviation about 7°F. Thus, 80°F was determined to be a 'hot day' for exploring the effect of heat and hourly electricity demand in the model.
 
 ```{r,warning=FALSE, message=FALSE, results='hide'}
 
@@ -272,7 +274,7 @@ model_tou_peak_demand <- lm(formula = hourly_energy_mwh ~
 
 ```
 
-The previous regression model predicts energy demand given that each predictor doesn't influence the relationship between the energy demand and other variables. However, thinking about the goal of TOU policy, we can add an interaction model to the linear regression to see if the effect of peak hours is affected by the TOU policy implementation. I would predict that there would be a greater energy demand decrease after the TOU policy was implemented than before during the peak hours. The new interaction model equation is: $$hwy_i =\beta_{0}+\beta_{1} \cdot TOUPolicy_i +\beta_{2} \cdot \text HotDay_i+ \beta_{3} \cdot \text PeakHour_i + \beta_{3} \cdot \text PeakHour_i \cdot TOUPolicy_i  + \varepsilon_i$$
+The previous regression model predicts energy demand given that each predictor doesn't influence the relationship between the energy demand and other variables. However, thinking about the goal of TOU policy, we can add an interaction model to the linear regression to see if the effect of peak hours on hourly electricity demand is affected by the TOU policy implementation. I would predict that there would be a greater energy demand decrease after the TOU policy was implemented than before during the peak hours. The new interaction model equation is: $$hwy_i =\beta_{0}+\beta_{1} \cdot TOUPolicy_i +\beta_{2} \cdot \text HotDay_i+ \beta_{3} \cdot \text PeakHour_i + \beta_{3} \cdot \text PeakHour_i \cdot TOUPolicy_i  + \varepsilon_i$$
 
 ```{r,warning=FALSE, message=FALSE, results='hide'}
 model_int_tou_peak_demand <- lm(formula = hourly_energy_mwh ~ 
@@ -333,16 +335,16 @@ decom_plot_monthly <- model(decom_ts,
 ### results
 
 [Multiple Linear Regression:]{.underline}\
-From our model, we can interpret all of the predictors used in the regression are statistically significant in predicting hourly electricity demand at a significance level of 0.001 as they all had a p-value of 2 x e^-16^. The model indicates that when the daily maximum temperature is below 80°F and we are looking at non-peak hours prior to the Time-of-Use implementation in 2020, the average hourly electricity demand is about 2,164 MWh for the SDGE's service territory. In addition, we expect to see on average a decrease in hourly electricity demand by about 108 MWh for years after the Time-of-Use energy policy was implemented, holding all other predictors constant. For days in which the maximum temperature is above 80°F, the model predicts that the average hourly electricity demand increases by about 409 MWh holding all other predictors constant.
+From our model, we can interpret all of the predictors used in the regression are statistically significant in predicting hourly electricity demand at a significance level of 0.001 as they all had a p-value of 2 x e^-16^. The model indicates that when the daily maximum temperature is below 80°F, during non-peak hours prior to the Time-of-Use implementation in 2020, the average hourly electricity demand is about 2,164 MWh for the SDGE's service territory. In addition, we expect to see on average a decrease in hourly electricity demand by about 108 MWh for years after the Time-of-Use energy policy was implemented, holding all other predictors constant. For days in which the maximum temperature is above 80°F, the model predicts that the average hourly electricity demand increases by about 409 MWh holding all other predictors constant.
 
-Interestingly, the model predicts that the average hourly electricity demand decreases by about 360 MWh holding all other predictors constant. At first thought, we may expect too see hourly electricity demand to increase during peak times as these are times in which the TOU electricity policy calls out as times with higher energy demand. However, in this analysis we didn't look at the amount of renewable electricity available on the grid. Thus, overall energy demand may be lower during peak times but it is possible the percent of average hourly electricity demand in relation to hourly renewable electricity available on the grid may be higher during peak times than non-peak times.
+Interestingly, the model predicts that the average hourly electricity demand decreases by about 360 MWh holding all other predictors constant. At first thought, we may expect too see hourly electricity demand to increase during peak times as these are times in which the TOU electricity policy calls out as times with higher energy demand. However, in this analysis we didn't look at the amount of renewable electricity available on the grid. Thus, overall energy demand may be lower during peak times. However it is possible the percent of average hourly electricity demand in relation to hourly renewable electricity available on the grid may be higher during peak times than non-peak times.
 
 Table 1 in the supporting figures section highlights these estimates, p-value and confidence interval for each of the predictors and intercept and the following equation for the linear regression model is:
 
 $$Hourly EnergyDemand = 2164 - {108} \cdot TOUPolicy_i - {360} \cdot \text HotDay_i+ {409} \cdot \text PeakHour_i +\varepsilon_i$$
 
 [Multiple Linear Regression with the Interaction Model:]{.underline}\
-This interaction model tells us that the average change in hourly electricity demand during peak hours after the TOU policy was implemented compared to hourly energy demand during peak hours before the TOU policy was implemented is -98 MWh. This estimate is statistically significant at a significance level of 0.001 (p-value of 2 x e^-16^). The graph (Figure 2) below of the linear model with the interaction added indicates that the relationship between energy demand and peak hours varies based on the implementation of the TOU policy as the slope of the lines are different.
+This interaction model indicates that the impact of the TOU policy on hourly electricity demand is 98 MWh lower in times that fall within the peak hours compared to times that fall outside peak hours. This estimate is statistically significant at a significance level of 0.001 (p-value of 2 x e^-16^). Figure 2 illustrates the linear model with the interaction added. From the graph, the differences in slopes show that the relationship between energy demand and peak hours varies based on the implementation of the TOU policy.
 
 ```{r,warning=FALSE, message=FALSE}
 
@@ -356,7 +358,7 @@ print("Figure 2")
 
 The adjusted R^2^ values also increased slightly (from 0.213 to 0.214) when adding the interaction model. This demonstrates that the interaction model just slightly increases model fit.
 
-However, the adjusted R^2^ value indicates that only about 21% of hourly electricity demand is explained by the model. With this information, we can hypothesis that there are other factors that affect hourly electricity demand not included within this model. Therefore, we can state that the time-of-use policy implementation had a statically significant decrease in hourly electricity demand (at a significance level of 0.001) but overall hourly electricty demand is more greater affected by other predictors.
+However, this adjusted R^2^ value also indicates that only about 21% of the variability in hourly electricity demand is explained by the model. With this information, we can hypothesis that there are other factors that affect hourly electricity demand not included within this model. Therefore, we can state that the time-of-use policy implementation had a statically significant decrease in hourly electricity demand (at a significance level of 0.001) but overall hourly electricity demand is more greater affected by other predictors.
 
 [Time Series Analysis - Classical Decomposition:]{.underline}\
 To better understand the other factors that influence hourly energy demand, we can look at classical decomposition graphs for our time series data for both yearly and monthly seasonality (Figure 3 and 4).
@@ -372,18 +374,18 @@ Looking at the graphs there doesn't appear to be evidence of a long-run trend in
 
 ### discussion & conclusion
 
-With this initial analysis we can conclude that the time-of-use energy rate policy had an effect on hourly electricity demand in SDGE's service territory, and had a greater effect during peak hours. However, we can also see how other factors not addressed in the model account for more of the variation in hourly electricity demand.
+With this initial analysis we can conclude that the TOU energy rate policy had an effect on hourly electricity demand in SDGE's service territory, and had a greater effect during peak hours. However, we can also that other factors not addressed in the model account for more of the variation in hourly electricity demand.
 
-Additional research and analysis should be done to determine how the time-of-use policy affects electricity demand in relation to the other factors that weren't addressed in this analysis. This can include dividing electricity demand by customer type or rate class, as this analysis just uses an aggregated energy demand for all customers. To expand further on this, this analysis was conducted with the assumption that all SDGE customers transitioned to a Time-of-Use energy rate that had peak hours from 4:00 - 9:00 p.m. (TOU-C rate) and were transitioned all at the same time. We know that this is not the case as it was a rolling transition throughout the year 2020 and not all customers were transitioned to the TOU-C rate. Conducting this analysis with a more accurate indication of TOU implementation per customer is needed. However, this type information is not publicly available by utilities as it can include confidential customer information.
+Additional research and analysis should be done to determine how the TOU policy affects electricity demand in relation to the other factors not addressed in this analysis. This can include dividing electricity demand by customer type or rate class, as this analysis just uses an aggregated energy demand for all customers. Furthermore, this analysis was conducted with the assumption that all SDGE customers transitioned to a TOU rate that had peak hours from 4:00 - 9:00 p.m. (TOU-C rate) and were transitioned all at the same time. We know that this is not the case. SDGE conducted a rolling transition throughout the year 2020 and not all customers were transitioned to the TOU-C rate. Conducting this analysis with a more accurate indication of TOU implementation per customer is needed. However, this type information is not publicly available by utilities as it can include confidential customer information.
 
-In addition, this analysis is also spatially limited for SDGE's service area additional research can expand this investigation statewide. Lastly, this investigation just looks at electricity demand. However, as noted previously a key part of time-of-use policy is to reduce energy use when demand is high and renewable supply is low. Instead of solely using hourly electricity demand as the outcome variable, future research can look into how the TOU policy affects energy demand when renewable supply is low.
+In addition, this analysis is also spatially limited for SDGE's service area. Additional research can expand this investigation statewide. Lastly, this investigation just looks at electricity demand. However, as noted previously a key part of TOU policy is to reduce energy use when demand is high and renewable supply is low. Instead of solely using hourly electricity demand as the outcome variable, future research can look into how the TOU policy affects energy demand when renewable supply is low.
 
 Given additional analysis is conducted, this information can be used to inform policy makers, energy providers (load-serving entities) and grid operators about the effectiveness of the TOU policy and and how the policy can continue to support California's clean energy goals.
 
 ### supporting figures & links
 
 To see the full repository, check out the project on Github at:\
-https://github.com/colleenmccamy/tou-energy-analysis
+[https://github.com/colleenmccamy/tou-energy-analysis](https://github.com/colleenmccamy/tou-energy-analysishttps://github.com/colleenmccamy/tou-energy-analysis)
 
 Table 1:
 
