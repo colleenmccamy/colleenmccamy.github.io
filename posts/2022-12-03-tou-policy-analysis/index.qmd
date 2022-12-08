@@ -113,7 +113,7 @@ In California, peak electricity demand and temperature is highly correlated. [^7
 ![](thermostat_circle.png)
 :::
 
-The temperature data is an aggregate of multiple stations throughout San Diego County, whic can cause sampling bias. The SDGE service territory covers multiple different climate zones [^9] which may not be accurately represented in proportion to hourly energy demand within the aggregate average temperature for the stations. Also, the weather stations are more heavily concentrated towards the coast which may be a source of bias producing more cooler and moderate moderate maximum temperature in the data.
+The temperature data is an aggregate of multiple stations throughout San Diego County, which can cause sampling bias. The SDGE service territory covers multiple different climate zones [^9] which may not be accurately represented in proportion to hourly energy demand within the aggregate average temperature for the stations. Also, the weather stations are more heavily concentrated towards the coast which may be a source of bias producing more cooler and moderate maximum temperature in the data.
 
 [^9]: US Department of Commerce, NOAA. n.d. "Climate." NOAA's National Weather Service. Accessed December 3, 2022. https://www.weather.gov/wrh/Climate?wfo=sgx.
 
@@ -182,7 +182,7 @@ peak_demand_plot <- ggplot(data = daily_peak_hrs_df,
        aes(x = date, 
            y = daily_energy_mwh)) +
   geom_line(col = "#b52b8c") +
-  labs(title = "Hourly Energy Demand (MWh) During Peak Hours Over Time",
+  labs(title = "Hourly Energy Demand (MWh) Over Time",
        x = "Date",
        y = "Houlry Electricity Demand (MWh) Durin Peak Hours") +
   theme_minimal() +
