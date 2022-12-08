@@ -290,7 +290,7 @@ summary(model_int_tou_peak_demand)
 
 #### [Time Series Analysis]{.underline}
 
-Diving deeper into additional affects on energy demand, I conducted a classical decomposition analysis to investigate if seasonality or any overall trends influence hourly electricity demand within the time frame we are interested in.
+Diving deeper into additional effects on energy demand, I conducted a classical decomposition analysis to investigate if seasonality or any overall trends influence hourly electricity demand within the time frame we are interested in.
 
 ```{r,warning=FALSE, message=FALSE, results='hide'}
 
