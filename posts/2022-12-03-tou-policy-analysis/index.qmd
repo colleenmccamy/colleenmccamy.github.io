@@ -14,7 +14,7 @@ format:
     code-fold: true
     code-summary: "checkout the code"
     code-overflow: wrap
-    code-block-bg: "#ffe3ef"
+    code-block-bg: "#cce0dd"
 page-layout: article
 #title-block-banner: energy-meters.jpg
 #bibliography: references.bib
@@ -213,7 +213,7 @@ A multi-linear regression model and time series decomposition analysis can help 
 
 #### [Linear Model]{.underline}
 
-To investigate if TOU policy influenced hourly energy demand, I used a multiple linear regression model. The equation for this model is: $$hwy_i =\beta_{0}+\beta_{1} \cdot TOUPolicy_i +\beta_{2} \cdot \text HotDay_i+ \beta_{3} \cdot \text PeakHour_i +\varepsilon_i$$
+To investigate if the TOU policy influenced hourly energy demand, I used a multiple linear regression model. The equation for this model is: $$hwy_i =\beta_{0}+\beta_{1} \cdot TOUPolicy_i +\beta_{2} \cdot \text HotDay_i+ \beta_{3} \cdot \text PeakHour_i +\varepsilon_i$$
 
 The 'TOUPolicy' predictor ('tou_policy' in the results) is a dichotomous variable indicating if the TOU Policy was in effect or not. The 'PeakHour' predictor is also a dichotomous variable which indicates whether or not the hour of the day falls within peak TOU pricing times from 4:00 - 9:00 p.m.
 
