@@ -55,7 +55,7 @@ Answering the question, 'did the Time-of-Use electricity rate transition have an
 
 ::: g-col-8
 [[Electricity Demand Data]{.underline}](https://www.eia.gov/opendata/browser/electricity/rto/region-sub-ba-data)\
-Electricity demand data used in this analysis are publicly available and provided by the US Energy Information Administration. The data were downloaded via the API dashboard \[\^6\] and were selected to include hourly electricity demand in megawatt hours (MWh) for the dates of July 1, 2018 to July 31, 2022, in the local time zone (Pacific), and for the San Diego Gas and Electric (SDGE) subregion. SDGE serves 3.7 million people through 1.5 million electric meters. Their service territory covers 4,100 square miles in San Diego and southern Orange counties and the energy demand data are an aggregate hourly electricity demand from all customers with SDGE service. [^6]
+Electricity demand data used in this analysis are publicly available and provided by the US Energy Information Administration. The data were downloaded via the API dashboard [^6] and were selected to include hourly electricity demand in megawatt hours (MWh) for the dates of July 1, 2018 to July 31, 2022, in the local time zone (Pacific), and for the San Diego Gas and Electric (SDGE) subregion. SDGE serves 3.7 million people through 1.5 million electric meters. Their service territory covers 4,100 square miles in San Diego and southern Orange counties and the energy demand data are an aggregate hourly electricity demand from all customers with SDGE service. [^7]
 :::
 
 [^6]: "API Dashboard - U.S. Energy Information Administration (EIA)." n.d. Accessed December 3, 2022. https://www.eia.gov/opendata/browser/electricity/rto/region-sub-ba-data.
