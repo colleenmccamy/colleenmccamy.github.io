@@ -54,7 +54,7 @@ Answering the question, 'did the Time-of-Use electricity rate transition have an
 ### the data
 
 ::: g-col-8
-[Electricity Demand Data]{.underline}\
+[[Electricity Demand Data]{.underline}](https://www.eia.gov/opendata/browser/electricity/rto/region-sub-ba-data)\
 Electricity demand data used in this analysis are publicly available and provided by the US Energy Information Administration. The data were downloaded via the API dashboard \[\^6\] and were selected to include hourly electricity demand in megawatt hours (MWh) for the dates of July 1, 2018 to July 31, 2022, in the local time zone (Pacific), and for the San Diego Gas and Electric (SDGE) subregion. SDGE serves 3.7 million people through 1.5 million electric meters. Their service territory covers 4,100 square miles in San Diego and southern Orange counties and the energy demand data are an aggregate hourly electricity demand from all customers with SDGE service. [^6]
 :::
 
@@ -102,7 +102,7 @@ eia_ts <- eia_df |>
 
 ```
 
-[Temperature Data]{.underline}\
+[[Temperature Data]{.underline}](https://www.weather.gov/wrh/climate)\
 In California, peak electricity demand and temperature is highly correlated. [^7] As this investigation looks into energy demand, temperature data was added to the analysis. The temperature data used in the following analysis are publicly available through the NOWData Online Weather Data portal from the National Weather Service, a branch of the National Oceanic and Atmospheric Administration.[^8] The temperature data includes an average of daily maximum, minimum, and average temperature from numerous weather stations throughout San Diego County in degrees Fahrenheit (F). This analysis uses maximum daily temperature at the same temporal scale as the energy demand data.
 
 [^7]: "Our Company \| San Diego Gas & Electric." n.d. Accessed December 3, 2022. https://www.sdge.com/more-information/our-company.
