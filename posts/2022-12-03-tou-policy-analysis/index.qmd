@@ -380,7 +380,7 @@ Additional research and analysis should be done to determine how the TOU policy 
 
 This analysis is also spatially limited for SDGE's service area. Additional research can expand this investigation statewide. Lastly, this investigation just looks at electricity demand. However, as noted previously a key part of TOU policy is to reduce energy use when demand is high and renewable supply is low. Instead of solely using hourly electricity demand as the outcome variable, future research can look into how the TOU policy affects energy demand when renewable supply is low.
 
-Given additional analysis is conducted, this information can be used to inform policy makers, energy providers (load-serving entities) and grid operators about the effectiveness of the TOU policy and and how the policy can continue to support California's clean energy goals.
+Given additional analysis is conducted, this information can be used to inform policy makers, energy providers (load-serving entities) and grid operators about the effectiveness of the TOU policy and how the policy can continue to support California's clean energy goals.
 
 ### supporting figures & links
 
