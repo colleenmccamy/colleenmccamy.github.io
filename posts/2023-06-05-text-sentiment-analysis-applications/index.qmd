@@ -18,30 +18,29 @@ format:
 page-layout: article
 #title-block-banner: energy-meters.jpg
 #bibliography: references.bib
-#image: music_cds.jpg
+image: books.jpg
 ---
 
+### support vector machine
 
-
-### support vector machine 
 #### classification of climbing incidents
 
-       
 <embed src="pdf/support_vector_machine_climbing_classifications.pdf" width="100%" height="800px" type="application/pdf">
 
 ### topic analysis
+
 #### analyzing nuclear topic distribution
 
 <embed src="pdf/nuclear_topic_analysis.pdf" width="100%" height="800px" type="application/pdf">
 
 ### sentiment analysis
+
 #### analyzing nuclear sentiment distribution
 
 <embed src="pdf/nuclear_sentiment_analysis.pdf" width="100%" height="800px" type="application/pdf">
 
 ### tokenizing a corpus
+
 #### decarbonization word distribution analysis
 
 <embed src="pdf/tokenizing_corpus_nyt_api.pdf" width="100%" height="800px" type="application/pdf">
-
-
