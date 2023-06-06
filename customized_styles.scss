@@ -38,3 +38,10 @@ h3 {
   font-style: italic;
   color: $charcoal-blue;
 }
+
+
+$favicon-size: 40px; // Adjust the value to your desired dimensions
+#favicon {
+  width: $favicon-size;
+  height: $favicon-size;
+}
