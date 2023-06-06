@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/2023-06-05-machine-learning-applications/boosted_trees_python.html",
+      "/posts/2023-06-05-machine-learning-applications/index.html",
       "/posts/2023-06-05-text-sentiment-analysis-applications/index.html",
       "/posts/2023-03-27-music-matching/index.html",
       "/posts/2022-12-06-ethics-of-ai-in-circles/index.html",

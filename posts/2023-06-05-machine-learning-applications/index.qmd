@@ -1,0 +1,46 @@
+---
+title: "Applications of Machine Learning"
+description: "Boosted trees, regression, knn and more!"
+author: 
+  - name: Colleen McCamy
+    affiliation: MEDS
+date: 2023-05-06
+categories:  [data science, R, machine leanring]
+citation: 
+  url: https://colleenmccamy.github.io/2023-06-05-machine-learning
+draft: false
+format:
+  html:
+    code-fold: false
+    code-summary: "checkout the code"
+    code-overflow: wrap
+    code-block-bg: "#cce0dd"
+page-layout: article
+#title-block-banner: energy-meters.jpg
+#bibliography: references.bib
+#image: music_cds.jpg
+---
+
+### Decision Tree, K-Nearest Neighbor, Bagged Tree, Random Forest
+
+#### Using Spotify music data
+
+<embed src="pdf/knn_decision_tree_spotify_data.pdf" width="100%" height="800px" type="application/pdf">
+
+### Boosted Trees
+
+#### Using XGBoost for Predicting Eel Distribution
+
+<embed src="pdf/boosted_trees_r.pdf" width="100%" height="800px" type="application/pdf">
+
+### Logistic Regression
+
+#### classification of fire and tree mortality
+
+<embed src="pdf/logisitic_regression.pdf" width="100%" height="800px" type="application/pdf">
+
+### Lasso & Ridge Comparison
+
+#### Predicting abalone age
+
+<embed src="pdf/lasso_and_ridge_model_comparisons.pdf" width="100%" height="800px" type="application/pdf">

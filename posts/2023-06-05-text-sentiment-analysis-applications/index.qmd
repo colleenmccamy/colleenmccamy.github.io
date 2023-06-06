@@ -4,8 +4,8 @@ description: "Using machine learning and tokenization of corpus"
 author: 
   - name: Colleen McCamy
     affiliation: MEDS
-date: 2023-03-27
-categories:  [data science, R, modeling, machine leanring]
+date: 2023-05-06
+categories:  [data science, R, machine leanring]
 citation: 
   url: https://colleenmccamy.github.io/2023-06-05-text-analysis
 draft: false
