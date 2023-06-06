@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/2023-06-05-text-sentiment-analysis-applications/index.html",
+      "/posts/2023-03-27-music-matching/index.html",
       "/posts/2022-12-06-ethics-of-ai-in-circles/index.html",
       "/posts/2022-12-03-tou-policy-analysis/index.html",
       "/posts/2022-11-15-lights-out-in-texas/index.html",

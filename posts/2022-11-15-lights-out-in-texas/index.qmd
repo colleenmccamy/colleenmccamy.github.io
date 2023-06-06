@@ -277,6 +277,7 @@ tmap_mode("view")
 # mapping median income by census track and identifying outages by dots
 tm_shape(census_map_data) +
   tm_polygons(col = "median_income",
+              alpha = 0.5,
               palette = c("#227c9d", 
                           "#17c3b2", 
                           "#ffcb77", 
